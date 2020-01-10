@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+import Like from '../common/Like'
 
  function MovieTable(props) {
     return (
@@ -9,6 +10,7 @@ import React from 'react'
                     <th> Genre</th>
                     <th> Stock</th>
                     <th> Rate</th>
+                    <th> </th>
                     <th> </th>
                 </tr>
 
@@ -22,7 +24,8 @@ import React from 'react'
                   <td>{movie.genre.name}</td>
                   <td>{movie.numberInStock}</td>
                   <td>{movie.dailyRentalRate}</td>
-                  <td> <button className="btn btn-danger btn-sm m-2">Delete</button></td>
+                  <td><Like liked={movie.liked} movie={movie} onLiked={props.onLiked}/></td>
+                  <td> <button onClick={()=>{ props.onDelete(movie)}} className="btn btn-danger btn-sm m-2">Delete</button></td>
                   
 
 

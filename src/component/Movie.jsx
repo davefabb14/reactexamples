@@ -13,7 +13,7 @@ import MovieTable from './MovieTable'
         return (
             <div>
     <h2>{displayMessage}</h2>
-            <MovieTable movies={this.props.movies}/>
+            <MovieTable movies={this.props.movies} onDelete={this.props.onDelete} onLiked={this.props.onLiked}/>
                 
             </div>
         )
