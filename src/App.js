@@ -10,6 +10,8 @@ import './App.css';
      super(props)
      this.state={
        movies: getMovies(),
+       pageSize:4,
+       currentPage:1,
      }
    }
    handleDelete=(movie)=>{
@@ -29,11 +31,19 @@ import './App.css';
       this.setState({movies})
 
    }
+   handlePageChange=(page)=>{
+     this.setState({currentPage:page})
+
+   }
   render() {
     return (
       <main className="container">
       <h1>Movie APP</h1>
-      <Movie  movies={this.state.movies} onDelete={this.handleDelete} onLiked={this.handleLiked}/>
+      <Movie  movies={this.state.movies} onDelete={this.handleDelete} onLiked={this.handleLiked}
+      itemCount={this.state.movies.length}
+      pageSize={this.state.pageSize}
+      currentPage={this.state.currentPage}
+      onPageChange={this.handlePageChange}/>
     </main>
     )
   }

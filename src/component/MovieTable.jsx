@@ -1,8 +1,14 @@
 import React from 'react';
 import Like from '../common/Like'
+import Pagination from '../common/Pagination'
+
 
  function MovieTable(props) {
+     
+    const {movies ,currentPage ,pageSize,onPageChange}=props
+      
     return (
+        <React.Fragment>
         <table className="table m-5">
             <thead>
                 <tr>
@@ -17,7 +23,7 @@ import Like from '../common/Like'
             </thead>
             <tbody>
               {
-                  props.movies.map((movie)=>{
+                  movies.map((movie)=>{
                       return (
                       <tr key={movie._id}>
                   <td>{movie.title}</td>
@@ -39,6 +45,11 @@ import Like from '../common/Like'
 
             
         </table>
+        <Pagination itemCount={props.itemCount} pageSize={pageSize} 
+        currentPage={currentPage}
+        onPageChange={onPageChange}/>
+
+        </React.Fragment>
     )
 }
 

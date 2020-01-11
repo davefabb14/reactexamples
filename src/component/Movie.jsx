@@ -1,19 +1,28 @@
 import React, { Component } from 'react'
 import MovieTable from './MovieTable'
+import  {Paginate}  from '../utils/paginate'
 
  class Movie extends Component {
      
      
     render() {
+        const {movies,currentPage,pageSize}=this.props
+    const paginMovie= Paginate(movies, currentPage,pageSize)
         let displayMessage;
-        if(this.props.movies.length===0) displayMessage="There are no movie in the database."
+        if(paginMovie.length===0) displayMessage="There are no movie in the database."
          else{
-             displayMessage="showing " +this.props.movies.length + "  Movies in the database"
+             displayMessage="showing " +paginMovie.length + "  Movies in the database"
          }
         return (
             <div>
     <h2>{displayMessage}</h2>
-            <MovieTable movies={this.props.movies} onDelete={this.props.onDelete} onLiked={this.props.onLiked}/>
+            <MovieTable movies={paginMovie} onDelete={this.props.onDelete} onLiked={this.props.onLiked}
+            
+            itemCount={this.props.itemCount}
+            pageSize={this.props.pageSize}
+            currentPage={this.props.currentPage}
+            onPageChange={this.props.onPageChange}
+            />
                 
             </div>
         )
