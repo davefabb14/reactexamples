@@ -5,17 +5,17 @@ import Pagination from '../common/Pagination'
 
  function MovieTable(props) {
      
-    const {movies ,currentPage ,pageSize,onPageChange}=props
+    const {movies ,currentPage ,pageSize,onPageChange ,onSort}=props
       
     return (
         <React.Fragment>
         <table className="table m-5">
             <thead>
                 <tr>
-                    <th> Title</th>
-                    <th> Genre</th>
-                    <th> Stock</th>
-                    <th> Rate</th>
+                    <th onClick={()=>{onSort('title')}}> Title</th>
+                    <th  onClick={()=>{onSort('genre.name')}}> Genre</th>
+                    <th  onClick={()=>{onSort('numberInStock')}}> Stock</th>
+                    <th  onClick={()=>{onSort('dailyRentalRate')}}> Rate</th>
                     <th> </th>
                     <th> </th>
                 </tr>
@@ -45,9 +45,10 @@ import Pagination from '../common/Pagination'
 
             
         </table>
-        <Pagination itemCount={props.itemCount} pageSize={pageSize} 
+        
+      <Pagination itemCount={props.itemCount} pageSize={pageSize} 
         currentPage={currentPage}
-        onPageChange={onPageChange}/>
+        onPageChange={onPageChange}/> 
 
         </React.Fragment>
     )

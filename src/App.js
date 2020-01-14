@@ -1,19 +1,27 @@
 import React, { Component } from 'react'
 import Movie from './component/Movie';
 import { getMovies}  from './services/fakeMovieService';
+import {getGenres}  from './services/fakeGenreService';
 import './App.css';
 
 
 
  class App extends Component {
+   
    constructor(props){
      super(props)
      this.state={
-       movies: getMovies(),
+       movies: [],
+       genre:[],
+       selectedGenre:null,
        pageSize:4,
        currentPage:1,
      }
    }
+   componentDidMount(){
+     this.setState({movies:getMovies(),genre:[{_id:"" ,name:"All Genre"},...getGenres()]})
+   }
+
    handleDelete=(movie)=>{
      const movies=this.state.movies.filter((m)=>{
        return movie._id !== m._id
@@ -35,6 +43,15 @@ import './App.css';
      this.setState({currentPage:page})
 
    }
+   handleOnSelectedItem=(genre)=>{
+     
+     this.setState({selectedGenre:genre ,currentPage:1})
+
+   }
+   handleSort=(column)=>{
+     console.log(column)
+
+   }
   render() {
     return (
       <main className="container">
@@ -43,7 +60,13 @@ import './App.css';
       itemCount={this.state.movies.length}
       pageSize={this.state.pageSize}
       currentPage={this.state.currentPage}
-      onPageChange={this.handlePageChange}/>
+      onPageChange={this.handlePageChange}
+      genres={this.state.genre}
+      selectedGenre={this.state.selectedGenre}
+      onSelectedItem={this.handleOnSelectedItem}
+      onSort={this.handleSort}
+      
+      />
     </main>
     )
   }
