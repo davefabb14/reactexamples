@@ -16,6 +16,7 @@ import './App.css';
        selectedGenre:null,
        pageSize:4,
        currentPage:1,
+       sortedColumn:{path:'title',order:'asc'}
      }
    }
    componentDidMount(){
@@ -48,8 +49,18 @@ import './App.css';
      this.setState({selectedGenre:genre ,currentPage:1})
 
    }
-   handleSort=(column)=>{
-     console.log(column)
+   handleSort=(path)=>{
+     const sortedColumn={...this.state.sortedColumn};
+    if(sortedColumn.path===path)
+    {
+       sortedColumn.order= sortedColumn.order=== "asc"?"desc":"asc"
+    }
+       else{
+
+        sortedColumn.path=path
+        sortedColumn.order='asc'
+       }
+   this.setState({sortedColumn})
 
    }
   render() {
@@ -65,6 +76,7 @@ import './App.css';
       selectedGenre={this.state.selectedGenre}
       onSelectedItem={this.handleOnSelectedItem}
       onSort={this.handleSort}
+      sortedColumn={this.state.sortedColumn}
       
       />
     </main>
