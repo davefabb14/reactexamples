@@ -1,27 +1,31 @@
-import React from 'react';
+import React, { Component } from 'react'
 import Like from '../common/Like'
 import Pagination from '../common/Pagination'
+import  TableHeader from '../common/tableHeader'
+import TableBody from '../common/tableBody'
+   
+    
+ class MovieTable extends Component {
+    columns=[{path:'title' ,label:'Title'},
+   
+    {path:'genre.name' ,label:'Genre'},
+    {path:'numberInStock' ,label:'Stock'},
+    {path:'dailyRentalRate' ,label:'Rate'},
+    {key:'liked' ,content:movie =><Like liked={movie.liked} movie={movie} onLiked={this.props.onLiked}/>},
+    {key:'delete', content: movie=> <button onClick={()=>{ this.props.onDelete(movie)}} className="btn btn-danger btn-sm m-2">Delete</button>}
 
-
- function MovieTable(props) {
-     
-    const {movies ,currentPage ,pageSize,onPageChange ,onSort}=props
-      
-    return (
-        <React.Fragment>
+   ]
+       render() {
+        const {movies ,itemCount,currentPage ,pageSize,onPageChange ,onDelete,onLiked ,onSort,sortedColumn}=this.props
+           return (
+              
+            <React.Fragment>
         <table className="table m-5">
-            <thead>
-                <tr>
-                    <th onClick={()=>{onSort('title')}}> Title</th>
-                    <th  onClick={()=>{onSort('genre.name')}}> Genre</th>
-                    <th  onClick={()=>{onSort('numberInStock')}}> Stock</th>
-                    <th  onClick={()=>{onSort('dailyRentalRate')}}> Rate</th>
-                    <th> </th>
-                    <th> </th>
-                </tr>
-
-            </thead>
-            <tbody>
+            <TableHeader  data={this.columns} sortedColumn={sortedColumn} onSort={onSort }/>
+            <TableBody rows={movies } columns={this.columns} />
+            
+            
+        {/* <tbody>
               {
                   movies.map((movie)=>{
                       return (
@@ -30,8 +34,8 @@ import Pagination from '../common/Pagination'
                   <td>{movie.genre.name}</td>
                   <td>{movie.numberInStock}</td>
                   <td>{movie.dailyRentalRate}</td>
-                  <td><Like liked={movie.liked} movie={movie} onLiked={props.onLiked}/></td>
-                  <td> <button onClick={()=>{ props.onDelete(movie)}} className="btn btn-danger btn-sm m-2">Delete</button></td>
+                  <td><Like liked={movie.liked} movie={movie} onLiked={onLiked}/></td>
+                  <td> <button onClick={()=>{ onDelete(movie)}} className="btn btn-danger btn-sm m-2">Delete</button></td>
                   
 
 
@@ -41,17 +45,21 @@ import Pagination from '../common/Pagination'
                   })
               }  
 
-            </tbody>
+            </tbody> */}
+            
 
             
         </table>
         
-      <Pagination itemCount={props.itemCount} pageSize={pageSize} 
+      <Pagination itemCount={itemCount} pageSize={pageSize} 
         currentPage={currentPage}
         onPageChange={onPageChange}/> 
 
         </React.Fragment>
-    )
-}
+           )
+       }
+   }
+   
+ 
 
 export default MovieTable

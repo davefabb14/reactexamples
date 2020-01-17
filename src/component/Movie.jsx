@@ -5,19 +5,16 @@ import ListGroup from "../common/ListGroup";
 import _ from 'lodash';
 
 class Movie extends Component {
-  render() {
-    const {
-      movies,
-      currentPage,
-      pageSize,
-      selectedGenre,
-      onPageChange,
-      onLiked,
-      onDelete,
-      onSort,
-      sortedColumn
-    } = this.props;
-    const filtered =
+    getData=()=>{
+        const {
+            movies,
+            currentPage,
+            pageSize,
+            selectedGenre,
+          
+            sortedColumn
+          } = this.props;
+        const filtered =
       selectedGenre && selectedGenre._id
         ? movies.filter(movie => {
             return selectedGenre._id === movie.genre._id;
@@ -26,7 +23,24 @@ class Movie extends Component {
         const sorted= _.orderBy(filtered ,[sortedColumn.path], sortedColumn.order )
 
     const paginMovie = Paginate(sorted, currentPage, pageSize);
-    console.log(filtered.length);
+    return {filtered, paginMovie}
+    }
+  render() {
+    const {
+     
+      currentPage,
+      pageSize,
+    
+      onPageChange,
+      onLiked,
+      onDelete,
+      onSort,
+      sortedColumn
+      
+    } = this.props;
+
+    const {filtered, paginMovie}=this.getData();
+    
     let displayMessage;
     if (paginMovie.length === 0)
       displayMessage = "There are no movie in the database.";
@@ -55,6 +69,8 @@ class Movie extends Component {
             currentPage={currentPage}
             onPageChange={onPageChange}
             onSort={onSort}
+            sortedColumn={sortedColumn}
+
           />
         </div>
       </div>
