@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import _ from 'lodash';
-import Like from './Like'
+
  
  
  export default class tableBody extends Component {

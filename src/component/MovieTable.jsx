@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import {Link} from 'react-router-dom';
 import Like from '../common/Like'
 import Pagination from '../common/Pagination'
 import  TableHeader from '../common/tableHeader'
@@ -6,7 +7,7 @@ import TableBody from '../common/tableBody'
    
     
  class MovieTable extends Component {
-    columns=[{path:'title' ,label:'Title'},
+    columns=[{path:'title' ,label:'Title',content:movie=><Link  to={`/movies/${movie._id}}`}> {movie.title}</Link>},
    
     {path:'genre.name' ,label:'Genre'},
     {path:'numberInStock' ,label:'Stock'},
@@ -16,7 +17,7 @@ import TableBody from '../common/tableBody'
 
    ]
        render() {
-        const {movies ,itemCount,currentPage ,pageSize,onPageChange ,onDelete,onLiked ,onSort,sortedColumn}=this.props
+        const {movies ,itemCount,currentPage ,pageSize,onPageChange ,onSort,sortedColumn}=this.props
            return (
               
             <React.Fragment>

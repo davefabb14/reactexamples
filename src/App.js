@@ -1,7 +1,13 @@
 import React, { Component } from "react";
+import {Route,Redirect ,Switch} from 'react-router-dom';
 import Movie from "./component/Movie";
 import { getMovies } from "./services/fakeMovieService";
 import { getGenres } from "./services/fakeGenreService";
+import  Customers from './component/customers';
+import  Rentals from './component/rentals';
+import  MovieForm from './component/movieform';
+import NotFound  from './component/notfound'
+import NavBar from './component/navbar'
 import "./App.css";
 
 class App extends Component {
@@ -45,14 +51,17 @@ class App extends Component {
     this.setState({ selectedGenre: genre, currentPage: 1 });
   };
   handleSort = sortedColumn=> {
-    console.log('called')
+    
     this.setState({ sortedColumn });
   };
   render() {
     return (
+      <React.Fragment>
+      <NavBar/>
       <main className="container">
-        <h1>Movie APP</h1>
-        <Movie
+        <Switch>
+          <Route path="/movies/:id"  component={MovieForm}/>
+        <Route path="/movies" render={props=><Movie
           movies={this.state.movies}
           onDelete={this.handleDelete}
           onLiked={this.handleLiked}
@@ -65,8 +74,21 @@ class App extends Component {
           onSelectedItem={this.handleOnSelectedItem}
           onSort={this.handleSort}
           sortedColumn={this.state.sortedColumn}
-        />
+        /> }></Route>
+        <Route path="/customers" component={Customers}></Route>
+        <Route path="/rentals" component={Rentals}></Route>
+        <Route path="/not-found" component={NotFound}></Route>
+        <Redirect from="/"  exact to="/movies" ></Redirect>
+        <Redirect to="/not-found"></Redirect>
+
+
+        </Switch>
+
+
+        
       </main>
+
+      </React.Fragment>
     );
   }
 }
