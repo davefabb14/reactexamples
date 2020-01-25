@@ -2,13 +2,16 @@ import React, { Component } from "react";
 import {Route,Redirect ,Switch} from 'react-router-dom';
 import Movie from "./component/Movie";
 import { getMovies } from "./services/fakeMovieService";
-import { getGenres } from "./services/fakeGenreService";
+import  { getGenres } from './services/fakeGenreService'
 import  Customers from './component/customers';
 import  Rentals from './component/rentals';
-import  MovieForm from './component/movieform';
+
 import NotFound  from './component/notfound'
 import NavBar from './component/navbar'
+import MovieForm  from './component/movieform'
+
 import "./App.css";
+
 
 class App extends Component {
   constructor(props) {
@@ -60,7 +63,11 @@ class App extends Component {
       <NavBar/>
       <main className="container">
         <Switch>
-          <Route path="/movies/:id"  component={MovieForm}/>
+        <Route path="/movie/:id"  component={MovieForm 
+          } />
+          <Route path="/movie/new"  component={
+          MovieForm 
+          } />
         <Route path="/movies" render={props=><Movie
           movies={this.state.movies}
           onDelete={this.handleDelete}
@@ -74,6 +81,9 @@ class App extends Component {
           onSelectedItem={this.handleOnSelectedItem}
           onSort={this.handleSort}
           sortedColumn={this.state.sortedColumn}
+         routeProps={props}
+
+
         /> }></Route>
         <Route path="/customers" component={Customers}></Route>
         <Route path="/rentals" component={Rentals}></Route>

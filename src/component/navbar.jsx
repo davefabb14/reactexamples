@@ -10,7 +10,7 @@ type="button"
 data-toggle="collapse"
 data-target="#navbarNavAltMarkup"
 aria-controls="navbarNavAltMarkup"
-aria-expand="false"
+
 aria-label="toggle navigation"
 >
     <span className="navbar-toggler-icon" />

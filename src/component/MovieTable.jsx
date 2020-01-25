@@ -7,7 +7,7 @@ import TableBody from '../common/tableBody'
    
     
  class MovieTable extends Component {
-    columns=[{path:'title' ,label:'Title',content:movie=><Link  to={`/movies/${movie._id}}`}> {movie.title}</Link>},
+    columns=[{path:'title' ,label:'Title',content:movie=><Link   movie to={`/movie/${movie._id}`}> {movie.title}</Link>},
    
     {path:'genre.name' ,label:'Genre'},
     {path:'numberInStock' ,label:'Stock'},
@@ -27,6 +27,9 @@ import TableBody from '../common/tableBody'
             
             
         {/* <tbody>
+
+
+            say hi
               {
                   movies.map((movie)=>{
                       return (
@@ -43,6 +46,7 @@ import TableBody from '../common/tableBody'
                       </tr>
                       );
 
+                      
                   })
               }  
 

@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import MovieTable from "./MovieTable";
 import { Paginate } from "../utils/paginate";
 import ListGroup from "../common/ListGroup";
+import {Link } from 'react-router-dom'
 import _ from 'lodash';
 
 class Movie extends Component {
@@ -24,6 +25,11 @@ class Movie extends Component {
 
     const paginMovie = Paginate(sorted, currentPage, pageSize);
     return {filtered, paginMovie}
+    }
+    handleClick=()=>{
+      console.log("FDFGDFGdfkjdgj")
+      this.props.routeProps.history.push("/registration")
+    
     }
   render() {
     const {
@@ -58,6 +64,7 @@ class Movie extends Component {
           />
         </div>
         <div className="col">
+          <Link  to="/movie/new" className="btn btn-primary btn-lg" style={{margin:"20px" }}>New Movies</Link>
           <h2>{displayMessage}</h2>
 
           <MovieTable
